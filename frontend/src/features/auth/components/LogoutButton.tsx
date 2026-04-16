@@ -19,8 +19,13 @@ export default function LogoutButton() {
   };
 
   return (
-    <button onClick={handleLogout} disabled={loading} style={{ padding: "8px 16px", cursor: loading ? "not-allowed" : "pointer" }}>
-      {loading ? "Cerrando..." : "Cerrar sesion"}
+    <button
+      onClick={handleLogout}
+      disabled={loading}
+      className="hover:bg-sky-50 transition-colors duration-200 p-2 rounded-full text-slate-500 active:scale-95 disabled:opacity-50 cursor-pointer"
+      title="Cerrar sesion"
+    >
+      <span className="material-symbols-outlined">logout</span>
     </button>
   );
 }

@@ -48,23 +48,42 @@ export default function ProfileForm({ currentName, onUpdated }: ProfileFormProps
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "12px", maxWidth: "360px" }}>
-      <div>
-        <label htmlFor="name">Nombre</label>
-        <input
-          id="name"
-          type="text"
-          {...register("name")}
-          style={{ display: "block", width: "100%", padding: "8px", marginTop: "4px" }}
-        />
-        {errors.name && <span style={{ color: "red", fontSize: "14px" }}>{errors.name.message}</span>}
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-w-md">
+      <div className="space-y-1.5">
+        <label htmlFor="name" className="block text-sm font-semibold text-on-surface tracking-wide">
+          Nombre
+        </label>
+        <div className="relative">
+          <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-xl">
+            badge
+          </span>
+          <input
+            id="name"
+            type="text"
+            {...register("name")}
+            className="w-full pl-12 pr-4 py-3 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all duration-200 outline-none"
+          />
+        </div>
+        {errors.name && <span className="text-error text-sm">{errors.name.message}</span>}
       </div>
 
-      {serverError && <p style={{ color: "red" }}>{serverError}</p>}
-      {success && <p style={{ color: "green" }}>Nombre actualizado</p>}
+      {serverError && (
+        <div className="bg-error-container text-on-error-container px-4 py-3 rounded-xl text-sm font-medium">
+          {serverError}
+        </div>
+      )}
+      {success && (
+        <div className="bg-secondary-container text-on-secondary-container px-4 py-3 rounded-xl text-sm font-medium">
+          Nombre actualizado
+        </div>
+      )}
 
-      <button type="submit" disabled={loading} style={{ padding: "10px", cursor: loading ? "not-allowed" : "pointer" }}>
-        {loading ? "Guardando..." : "Guardar"}
+      <button
+        type="submit"
+        disabled={loading}
+        className="bg-gradient-primary text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-primary/20 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+      >
+        {loading ? "Guardando..." : "Guardar cambios"}
       </button>
     </form>
   );

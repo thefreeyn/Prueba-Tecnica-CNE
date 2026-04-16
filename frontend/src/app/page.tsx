@@ -1,7 +1,6 @@
+import { redirect } from "next/navigation";
+import { ROUTES } from "@/lib/constants";
+
 export default function Home() {
-  return (
-    <main>
-      <h1>Prueba Tecnica CNE</h1>
-    </main>
-  );
+  redirect(ROUTES.LOGIN);
 }

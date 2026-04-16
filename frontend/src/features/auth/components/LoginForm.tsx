@@ -46,33 +46,67 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "12px", maxWidth: "360px", margin: "0 auto" }}>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          {...register("email")}
-          style={{ display: "block", width: "100%", padding: "8px", marginTop: "4px" }}
-        />
-        {errors.email && <span style={{ color: "red", fontSize: "14px" }}>{errors.email.message}</span>}
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      {/* Email Field */}
+      <div className="space-y-1.5">
+        <label className="block text-sm font-semibold text-on-surface tracking-wide" htmlFor="email">
+          Correo electronico
+        </label>
+        <div className="relative">
+          <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-xl">
+            mail
+          </span>
+          <input
+            id="email"
+            type="email"
+            {...register("email")}
+            placeholder="correo@ejemplo.com"
+            className="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all duration-200 outline-none"
+          />
+        </div>
+        {errors.email && (
+          <span className="text-error text-sm">{errors.email.message}</span>
+        )}
       </div>
 
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          {...register("password")}
-          style={{ display: "block", width: "100%", padding: "8px", marginTop: "4px" }}
-        />
-        {errors.password && <span style={{ color: "red", fontSize: "14px" }}>{errors.password.message}</span>}
+      {/* Password Field */}
+      <div className="space-y-1.5">
+        <label className="block text-sm font-semibold text-on-surface tracking-wide" htmlFor="password">
+          Contrasena
+        </label>
+        <div className="relative">
+          <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-xl">
+            lock
+          </span>
+          <input
+            id="password"
+            type="password"
+            {...register("password")}
+            placeholder="••••••••"
+            className="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all duration-200 outline-none"
+          />
+        </div>
+        {errors.password && (
+          <span className="text-error text-sm">{errors.password.message}</span>
+        )}
       </div>
 
-      {serverError && <p style={{ color: "red" }}>{serverError}</p>}
+      {serverError && (
+        <div className="bg-error-container text-on-error-container px-4 py-3 rounded-xl text-sm font-medium">
+          {serverError}
+        </div>
+      )}
 
-      <button type="submit" disabled={loading} style={{ padding: "10px", cursor: loading ? "not-allowed" : "pointer" }}>
-        {loading ? "Ingresando..." : "Ingresar"}
+      {/* Action Button */}
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full bg-gradient-primary text-white font-semibold py-4 px-6 rounded-xl ambient-shadow hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+      >
+        <span>{loading ? "Ingresando..." : "Ingresar al Panel"}</span>
+        {!loading && (
+          <span className="material-symbols-outlined">arrow_forward</span>
+        )}
       </button>
     </form>
   );
