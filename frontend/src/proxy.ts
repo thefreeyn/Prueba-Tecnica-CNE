@@ -3,7 +3,7 @@ import { COOKIE_NAMES, ROUTES } from "@/lib/constants";
 
 const PROTECTED_ROUTES = [ROUTES.DASHBOARD, ROUTES.ME];
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const accessToken = request.cookies.get(COOKIE_NAMES.ACCESS_TOKEN)?.value;
 
